@@ -59,6 +59,7 @@ export default function AntiGravity() {
       htmlEl.style.pointerEvents = "none";
     });
 
+    let animationFrame: number;
     const animate = () => {
       physicsElements.forEach(p => {
         // Apply gravity
