@@ -1,26 +1,78 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  body {
+    /* Custom Pixel/Crosshair Cursor */
+    cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="%23ec4899" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter"><line x1="12" y1="2" x2="12" y2="8"/><line x1="12" y1="16" x2="12" y2="22"/><line x1="2" y1="12" x2="8" y2="12"/><line x1="16" y1="12" x2="22" y2="12"/></svg>') 12 12, auto !important;
+  }
+  
+  a, button, [role="button"] {
+    cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="%2322c55e" stroke-width="3" stroke-linecap="square" stroke-linejoin="miter"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/></svg>') 12 12, pointer !important;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+.scrollbar-hide::-webkit-scrollbar {
+    display: none;
 }
+.scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+@keyframes ticker {
+  0% { transform: translateX(100%); }
+  100% { transform: translateX(-100%); }
+}
+
+.animate-ticker {
+  animation: ticker 25s linear infinite;
+}
+
+.chaos-mode {
+  animation: chaosBg 0.5s infinite alternate;
+}
+
+@keyframes chaosBg {
+  0% { filter: hue-rotate(0deg) contrast(1.2); }
+  25% { filter: hue-rotate(45deg) contrast(1.5) blur(1px); transform: skewX(1deg); }
+  50% { filter: hue-rotate(90deg) contrast(1.1) invert(0.1); transform: skewX(-1deg); }
+  75% { filter: hue-rotate(180deg) contrast(1.4) saturate(2); }
+  100% { filter: hue-rotate(270deg) contrast(1.3) blur(0.5px); }
+}
+
+/* Matrix Mode - Hacker theme override */
+.matrix-mode {
+  background: black !important;
+  color: #00ff00 !important;
+}
+
+.matrix-mode * {
+  background-color: transparent !important;
+  border-color: #00ff00 !important;
+  color: #00ff00 !important;
+  box-shadow: none !important;
+  text-shadow: 0 0 5px #00ff00 !important;
+}
+
+.matrix-mode img {
+  filter: sepia(100%) hue-rotate(70deg) saturate(300%) contrast(150%) !important;
+}
+
+@keyframes rageShake {
+  0% { transform: translate(1px, 1px) rotate(0deg); }
+  10% { transform: translate(-10px, -15px) rotate(-5deg); }
+  20% { transform: translate(-15px, 0px) rotate(5deg); }
+  30% { transform: translate(15px, 10px) rotate(0deg); }
+  40% { transform: translate(5px, -15px) rotate(5deg); }
+  50% { transform: translate(-5px, 15px) rotate(-5deg); }
+  60% { transform: translate(-15px, 5px) rotate(0deg); }
+  70% { transform: translate(15px, 1px) rotate(-5deg); }
+  80% { transform: translate(-5px, -5px) rotate(5deg); }
+  90% { transform: translate(15px, 15px) rotate(0deg); }
+  100% { transform: translate(1px, -15px) rotate(-5deg) scale(0); opacity: 0; filter: blur(10px); }
+}
+
+.animate-rage {
+  animation: rageShake 1.5s cubic-bezier(.36,.07,.19,.97) forwards;
+}
+
