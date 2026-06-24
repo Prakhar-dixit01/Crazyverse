@@ -1,3 +1,14 @@
+export interface ItemData {
+  id: string;
+  slug?: string;
+  title: string;
+  description: string;
+  thumbnail: string;
+  url: string;
+  category: string;
+  type: string;
+}
+
 export const PRO_GAMES_DATA: ItemData[] = [
   {
     id: "mp-1",
