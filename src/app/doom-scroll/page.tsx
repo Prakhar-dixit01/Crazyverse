@@ -76,7 +76,7 @@ export default function DoomScrollPage() {
   const observerTarget = useRef<HTMLDivElement>(null);
 
   const loadMore = useCallback(() => {
-    const randomItems = [];
+    const randomItems: any[] = [];
     for (let i = 0; i < 3; i++) { // Load fewer at a time to prevent lag
       const randomGame = PRO_GAMES_DATA[Math.floor(Math.random() * PRO_GAMES_DATA.length)];
       randomItems.push({ ...randomGame, uniqueId: Date.now() + Math.random() });
