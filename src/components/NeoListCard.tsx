@@ -4,7 +4,7 @@ interface NeoListCardProps {
   title: string;
   subtitle: string;
   count: number;
-  items: { slug: string; title: string; thumbnail?: string }[];
+  items: any[];
   viewAllLink?: string;
 }
 
@@ -26,9 +26,10 @@ export default function NeoListCard({ title, subtitle, count, items, viewAllLink
       <div className="flex-1 p-2 bg-white">
         <ul className="space-y-1">
           {items.map((item, index) => (
-            <li key={item.slug}>
+            <li key={item.id || index}>
               <Link 
-                href={`/play/${item.slug}`}
+                href={item.type === 'tool' ? item.url : `/play/${item.slug}`}
+                target={item.type === 'tool' ? '_blank' : '_self'}
                 className="flex items-center p-2 hover:bg-black hover:text-white group transition-colors border border-transparent hover:border-black"
               >
                 <span className="w-6 text-gray-400 group-hover:text-gray-300 font-bold text-xs">
