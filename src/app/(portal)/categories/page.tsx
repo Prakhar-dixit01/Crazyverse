@@ -5,8 +5,9 @@ import { Folder } from "lucide-react";
 export default function CategoriesPage() {
   // Extract unique categories and their counts
   const categories = PRO_GAMES_DATA.reduce((acc, item) => {
+    if (!item.category) return acc;
     if (!acc[item.category]) {
-      acc[item.category] = { count: 0, type: item.type };
+      acc[item.category] = { count: 0, type: item.type || 'game' };
     }
     acc[item.category].count += 1;
     return acc;
