@@ -47,7 +47,7 @@ export default function GlobalRunawayButton() {
   };
 
   return (
-    <div className="fixed bottom-12 right-12 z-[100] pointer-events-none">
+    <div className="fixed bottom-8 left-1/2 -translate-x-1/2 z-[90] pointer-events-none">
       <motion.button
         animate={{ x: position.x, y: position.y }}
         onHoverStart={handleHover}

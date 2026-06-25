@@ -105,7 +105,7 @@ export default function Gamification() {
       </AnimatePresence>
 
       {/* Floating XP Widget */}
-      <div className="fixed top-4 right-4 md:top-6 md:right-6 z-[100] font-sans scale-90 md:scale-100 origin-top-right">
+      <div className="fixed top-20 right-4 md:top-24 md:right-6 z-[90] font-sans scale-90 md:scale-100 origin-top-right">
         <div 
           className="bg-white border-2 border-gray-200 rounded-2xl shadow-xl overflow-hidden cursor-pointer hover:border-blue-400 transition-colors w-48"
           onClick={() => setIsOpen(!isOpen)}
