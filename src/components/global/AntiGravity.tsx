@@ -14,8 +14,12 @@ export default function AntiGravity({ isDocked = false }: { isDocked?: boolean }
     
     setIsGravityOff(true);
 
-    // Get all interactive elements
-    const elements = document.querySelectorAll("a, button, img, h1, h2, h3, p");
+    // Limit elements on mobile for better performance
+    const isMobile = window.innerWidth < 768;
+    const selector = isMobile 
+      ? "img, p, h1, h2" 
+      : "a, button, img, h1, h2, h3, p";
+    const elements = document.querySelectorAll(selector);
     
     const physicsElements: {
       el: HTMLElement;

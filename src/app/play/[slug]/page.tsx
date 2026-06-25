@@ -3,7 +3,7 @@
 import { PRO_GAMES_DATA } from "@/lib/data";
 import { notFound, useRouter } from "next/navigation";
 import Link from "next/link";
-import { ArrowLeft, Star, Lightbulb, Flame, PlayCircle, Clock } from "lucide-react";
+import { ArrowLeft, Star, Lightbulb, Flame, PlayCircle, Clock, Maximize } from "lucide-react";
 import { useState, use, useEffect } from "react";
 import confetti from "canvas-confetti";
 
@@ -129,22 +129,47 @@ export default function PlayPage({ params }: { params: Promise<{ slug: string }>
             
             <button 
               onClick={() => setFocusMode(!focusMode)}
-              className={`flex items-center gap-2 px-5 py-2.5 rounded-xl font-bold transition-all ${focusMode ? 'bg-yellow-400 text-black shadow-[0_0_20px_rgba(250,204,21,0.4)]' : 'bg-gray-100 text-gray-800 hover:bg-gray-200 border border-gray-200'}`}
+              className={`hidden md:flex items-center gap-2 px-5 py-2.5 rounded-xl font-bold transition-all ${focusMode ? 'bg-yellow-400 text-black shadow-[0_0_20px_rgba(250,204,21,0.4)]' : 'bg-gray-100 text-gray-800 hover:bg-gray-200 border border-gray-200'}`}
             >
-              <Lightbulb className="w-5 h-5" /> Focus Mode
+              <Lightbulb className="w-5 h-5" /> Focus
             </button>
             
+            {/* Mobile Fullscreen Button */}
+            <button 
+              onClick={() => {
+                const gameContainer = document.getElementById("game-container");
+                if (gameContainer) {
+                  if (document.fullscreenElement) {
+                    document.exitFullscreen();
+                  } else {
+                    gameContainer.requestFullscreen().catch(err => console.log(err));
+                    // Try to lock orientation to landscape
+                    try {
+                      // @ts-expect-error - Screen Orientation API might not be fully typed or supported everywhere
+                      if (screen.orientation && screen.orientation.lock) {
+                        screen.orientation.lock("landscape").catch(() => {});
+                      }
+                    } catch(e) {}
+                  }
+                }
+              }}
+              className="md:hidden flex items-center justify-center p-2.5 rounded-xl font-bold bg-blue-600 text-white shadow-lg hover:bg-blue-700"
+              title="Play Fullscreen"
+            >
+              <Maximize className="w-5 h-5" />
+            </button>
+
             <button 
               onClick={handleRageQuit}
-              className={`flex items-center gap-2 px-5 py-2.5 rounded-xl font-black transition-colors border group ${focusMode ? "bg-red-600/20 text-red-500 border-red-500/50 hover:bg-red-600 hover:text-white" : "bg-red-50 text-red-600 border-red-200 hover:bg-red-100"}`}
+              className={`flex items-center gap-2 px-3 md:px-5 py-2.5 rounded-xl font-black transition-colors border group ${focusMode ? "bg-red-600/20 text-red-500 border-red-500/50 hover:bg-red-600 hover:text-white" : "bg-red-50 text-red-600 border-red-200 hover:bg-red-100"}`}
             >
-              <Flame className="w-5 h-5 group-hover:animate-pulse" /> RAGE QUIT
+              <Flame className="w-5 h-5 group-hover:animate-pulse" /> <span className="hidden sm:inline">RAGE QUIT</span>
             </button>
           </div>
         </div>
 
         {/* Main Game Container */}
-        <div className="relative w-full max-w-6xl mx-auto flex justify-center mt-6">
+        <div id="game-container" className="relative w-full max-w-6xl mx-auto flex justify-center mt-6">
           
           {/* Cinematic Ambilight Effect (Blurred Image matching game thumbnail) */}
           <div className={`absolute inset-[-20px] z-0 overflow-hidden rounded-3xl pointer-events-none transition-opacity duration-1000 ${focusMode ? "opacity-60" : "opacity-20"}`}>

@@ -30,7 +30,7 @@ export default function NeoListCard({ title, subtitle, count, items, viewAllLink
               <Link 
                 href={item.type === 'tool' ? item.url : `/play/${item.slug}`}
                 target={item.type === 'tool' ? '_blank' : '_self'}
-                className="flex items-center p-2 hover:bg-black hover:text-white group transition-colors border border-transparent hover:border-black"
+                className="flex items-center p-3 md:p-2 min-h-[44px] hover:bg-black hover:text-white group transition-colors border border-transparent hover:border-black"
               >
                 <span className="w-6 text-gray-400 group-hover:text-gray-300 font-bold text-xs">
                   {index + 1}.
@@ -59,7 +59,7 @@ export default function NeoListCard({ title, subtitle, count, items, viewAllLink
 
       {/* Footer */}
       <div className="p-3 border-t-2 border-black text-center bg-gray-50 flex">
-        <Link href={viewAllLink} className="flex-1 text-black font-black text-xs hover:bg-black hover:text-white px-4 py-2 border-2 border-black transition-colors uppercase tracking-widest block text-center cursor-pointer">
+        <Link href={viewAllLink} className="flex-1 text-black font-black text-xs hover:bg-black hover:text-white px-4 py-3 md:py-2 min-h-[44px] flex items-center justify-center border-2 border-black transition-colors uppercase tracking-widest text-center cursor-pointer">
           View all {title}
         </Link>
       </div>

@@ -18,15 +18,21 @@ export default function ScreenShatter() {
       audio.volume = 0.5;
       audio.play().catch(e => console.log("Audio play blocked", e));
 
+      const isMobile = window.innerWidth < 768;
+      const maxCracks = isMobile ? 1 : 3;
+
       const newId = Date.now();
       
-      // Add a crack
-      setCracks(prev => [...prev, {
-        x: e.clientX,
-        y: e.clientY,
-        id: newId,
-        rot: Math.random() * 360
-      }]);
+      // Add a crack, respecting maximum limits to prevent lag
+      setCracks(prev => {
+        if (prev.length >= maxCracks) return prev;
+        return [...prev, {
+          x: e.clientX,
+          y: e.clientY,
+          id: newId,
+          rot: Math.random() * 360
+        }];
+      });
 
       // Automatically remove the crack after 3 seconds
       setTimeout(() => {

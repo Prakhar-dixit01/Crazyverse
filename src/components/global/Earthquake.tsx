@@ -20,16 +20,20 @@ export default function Earthquake({ isDocked = false }: { isDocked?: boolean })
     
     // Create random violent shakes
     let shakes = 0;
+    const isMobile = window.innerWidth < 768;
+    const intervalMs = isMobile ? 80 : 50; // Slower on mobile to save CPU
+    const shakeIntensity = isMobile ? 10 : 20;
+
     const interval = setInterval(() => {
-      document.body.style.transform = `translate(${Math.random() * 20 - 10}px, ${Math.random() * 20 - 10}px) rotate(${Math.random() * 2 - 1}deg)`;
+      document.body.style.transform = `translate(${Math.random() * shakeIntensity - (shakeIntensity/2)}px, ${Math.random() * shakeIntensity - (shakeIntensity/2)}px) rotate(${Math.random() * 2 - 1}deg)`;
       shakes++;
-      if (shakes > 60) { // 3 seconds at 20fps
+      if (shakes > (isMobile ? 40 : 60)) { // Shorter duration on mobile
         clearInterval(interval);
         document.body.style.transform = "";
         document.body.classList.remove("animate-earthquake");
         setIsQuaking(false);
       }
-    }, 50);
+    }, intervalMs);
   };
 
   return (

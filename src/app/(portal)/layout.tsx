@@ -2,7 +2,7 @@
 
 import { Search, Hash, SquareUser, Asterisk } from "lucide-react";
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import SearchModal from "@/components/SearchModal";
 import WastedTimeCounter from "@/components/WastedTimeCounter";
 
@@ -12,11 +12,31 @@ export default function PortalLayout({
   children: React.ReactNode;
 }) {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [showHeader, setShowHeader] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+
+    const controlHeader = () => {
+      if (window.scrollY > lastScrollY && window.scrollY > 80) {
+        // Scrolling down & past header height
+        setShowHeader(false);
+      } else {
+        // Scrolling up
+        setShowHeader(true);
+      }
+      setLastScrollY(window.scrollY);
+    };
+
+    window.addEventListener('scroll', controlHeader, { passive: true });
+    return () => window.removeEventListener('scroll', controlHeader);
+  }, [lastScrollY]);
 
   return (
     <div className="min-h-screen bg-[#fafafa] bg-[linear-gradient(to_right,#e5e5e5_1px,transparent_1px),linear-gradient(to_bottom,#e5e5e5_1px,transparent_1px)] bg-[size:3rem_3rem] font-sans text-black flex flex-col selection:bg-black selection:text-white">
       {/* Minimalist Monochrome Header */}
-      <header className="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-gray-200 h-16 md:h-20">
+      <header className={`sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-gray-200 h-16 md:h-20 transition-transform duration-300 ${showHeader ? 'translate-y-0' : '-translate-y-full'}`}>
         <div className="max-w-[1600px] mx-auto px-4 md:px-6 h-full flex items-center justify-between gap-4 md:gap-8">
           
           <div className="flex items-center gap-4 md:gap-8 h-full">
@@ -52,7 +72,9 @@ export default function PortalLayout({
                 Find
               </div>
             </button>
-            <WastedTimeCounter />
+            <div className="hidden sm:block">
+              <WastedTimeCounter />
+            </div>
           </div>
         </div>
       </header>
