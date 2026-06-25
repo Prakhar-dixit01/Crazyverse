@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { Apple } from "lucide-react";
 
-export default function AntiGravity() {
+export default function AntiGravity({ isDocked = false }: { isDocked?: boolean }) {
   const [isGravityOff, setIsGravityOff] = useState(false);
 
   const toggleGravity = () => {
@@ -97,14 +97,18 @@ export default function AntiGravity() {
   return (
     <button
       onClick={toggleGravity}
-      className={`fixed top-6 right-6 z-[100] p-4 rounded-full shadow-2xl transition-all duration-300 border-2 border-white/20 ${
+      className={`${
+        isDocked
+          ? "relative p-3 rounded-full hover:scale-110"
+          : "fixed top-6 right-6 z-[100] p-4 rounded-full shadow-2xl"
+      } transition-all duration-300 border-2 border-white/20 ${
         isGravityOff 
           ? "bg-purple-600 text-white animate-spin" 
           : "bg-blue-600 hover:bg-blue-700 text-white"
       }`}
       title={isGravityOff ? "Reload to fix Gravity" : "Turn Off Gravity"}
     >
-      <Apple className="w-6 h-6" />
+      <Apple className={isDocked ? "w-5 h-5" : "w-6 h-6"} />
     </button>
   );
 }

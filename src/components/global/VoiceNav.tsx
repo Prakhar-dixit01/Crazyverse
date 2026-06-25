@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Mic, MicOff } from "lucide-react";
 
-export default function VoiceNav() {
+export default function VoiceNav({ isDocked = false }: { isDocked?: boolean }) {
   const router = useRouter();
   const [isListening, setIsListening] = useState(false);
   const [supported, setSupported] = useState(true);
@@ -66,14 +66,18 @@ export default function VoiceNav() {
   return (
     <button
       onClick={() => setIsListening(!isListening)}
-      className={`fixed bottom-6 left-6 z-50 p-4 rounded-full shadow-2xl transition-all duration-300 flex items-center justify-center border-2 ${
+      className={`${
+        isDocked
+          ? "relative p-3 rounded-full hover:scale-110"
+          : "fixed bottom-6 left-6 z-50 p-4 rounded-full shadow-2xl"
+      } transition-all duration-300 flex items-center justify-center border-2 ${
         isListening 
           ? "bg-red-500 hover:bg-red-600 text-white border-red-400 animate-pulse" 
           : "bg-white text-black hover:bg-gray-100 border-black"
       }`}
       title="Voice Navigation (Say 'Games', 'Tools', or 'Home')"
     >
-      {isListening ? <Mic className="w-6 h-6" /> : <MicOff className="w-6 h-6" />}
+      {isListening ? <Mic className={isDocked ? "w-5 h-5" : "w-6 h-6"} /> : <MicOff className={isDocked ? "w-5 h-5" : "w-6 h-6"} />}
     </button>
   );
 }

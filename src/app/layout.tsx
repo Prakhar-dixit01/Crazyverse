@@ -14,17 +14,13 @@ import ChaosWrapper from "@/components/ChaosWrapper";
 import EasterEggListener from "@/components/EasterEggListener";
 import KonamiCode from "@/components/global/KonamiCode";
 import CursorTrail from "@/components/global/CursorTrail";
-import VoiceNav from "@/components/global/VoiceNav";
 import GlobalRunawayButton from "@/components/global/GlobalRunawayButton";
-
 import ScreenShatter from "@/components/global/ScreenShatter";
-import VandalizeCanvas from "@/components/global/VandalizeCanvas";
-import Earthquake from "@/components/global/Earthquake";
-import AntiGravity from "@/components/global/AntiGravity";
 
 import AnnoyingCompanion from "@/components/global/AnnoyingCompanion";
 import BossKey from "@/components/global/BossKey";
 import Gamification from "@/components/global/Gamification";
+import WidgetDock from "@/components/global/WidgetDock";
 
 export default function RootLayout({
   children,
@@ -39,14 +35,10 @@ export default function RootLayout({
         <EasterEggListener />
         <KonamiCode />
         <CursorTrail />
-        <VoiceNav />
         <GlobalRunawayButton />
-        
         <ScreenShatter />
-        <VandalizeCanvas />
-        <Earthquake />
-        <AntiGravity />
         
+        <WidgetDock />
         <AnnoyingCompanion />
         <BossKey />
         <Gamification />

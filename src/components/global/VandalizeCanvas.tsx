@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { PenTool, X } from "lucide-react";
 
-export default function VandalizeCanvas() {
+export default function VandalizeCanvas({ isDocked = false }: { isDocked?: boolean }) {
   const [isDrawingMode, setIsDrawingMode] = useState(false);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [isDrawing, setIsDrawing] = useState(false);
@@ -90,10 +90,14 @@ export default function VandalizeCanvas() {
     <>
       <button
         onClick={() => setIsDrawingMode(!isDrawingMode)}
-        className="fixed bottom-32 right-6 z-[100] p-4 rounded-full shadow-2xl transition-all duration-300 bg-black text-white hover:bg-gray-800 border-2 border-white/20"
+        className={`${
+          isDocked
+            ? "relative p-3 rounded-full hover:scale-110"
+            : "fixed bottom-32 right-6 z-[100] p-4 rounded-full shadow-2xl"
+        } transition-all duration-300 bg-black text-white hover:bg-gray-800 border-2 border-white/20`}
         title="Vandalize Mode (Draw on Screen)"
       >
-        {isDrawingMode ? <X className="w-6 h-6 text-red-500" /> : <PenTool className="w-6 h-6 text-blue-400" />}
+        {isDrawingMode ? <X className={isDocked ? "w-5 h-5 text-red-500" : "w-6 h-6 text-red-500"} /> : <PenTool className={isDocked ? "w-5 h-5 text-blue-400" : "w-6 h-6 text-blue-400"} />}
       </button>
 
       {isDrawingMode && (
