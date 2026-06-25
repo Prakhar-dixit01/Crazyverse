@@ -16,15 +16,15 @@ export default function PortalLayout({
   return (
     <div className="min-h-screen bg-[#fafafa] bg-[linear-gradient(to_right,#e5e5e5_1px,transparent_1px),linear-gradient(to_bottom,#e5e5e5_1px,transparent_1px)] bg-[size:3rem_3rem] font-sans text-black flex flex-col selection:bg-black selection:text-white">
       {/* Minimalist Monochrome Header */}
-      <header className="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-gray-200 h-20">
-        <div className="max-w-[1600px] mx-auto px-6 h-full flex items-center justify-between gap-8">
+      <header className="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-gray-200 h-16 md:h-20">
+        <div className="max-w-[1600px] mx-auto px-4 md:px-6 h-full flex items-center justify-between gap-4 md:gap-8">
           
-          <div className="flex items-center gap-8 h-full">
+          <div className="flex items-center gap-4 md:gap-8 h-full">
             <Link href="/" className="flex items-center group">
-              <div className="bg-black text-white w-12 h-12 flex items-center justify-center mr-4 rounded-sm hover:rounded-xl transition-all duration-300">
-                <Asterisk className="w-6 h-6 group-hover:rotate-90 transition-transform duration-500" />
+              <div className="bg-black text-white w-10 h-10 md:w-12 md:h-12 flex items-center justify-center md:mr-4 rounded-sm hover:rounded-xl transition-all duration-300 shrink-0">
+                <Asterisk className="w-5 h-5 md:w-6 md:h-6 group-hover:rotate-90 transition-transform duration-500" />
               </div>
-              <h1 className="text-2xl font-black tracking-tight uppercase hidden md:block">
+              <h1 className="text-xl md:text-2xl font-black tracking-tight uppercase hidden lg:block">
                 CRAZYVERSE
               </h1>
             </Link>
@@ -36,19 +36,19 @@ export default function PortalLayout({
             </nav>
           </div>
 
-          <div className="flex-1 max-w-2xl flex items-center h-12 gap-4">
+          <div className="flex-1 max-w-2xl flex items-center h-10 md:h-12 gap-2 md:gap-4 justify-end">
             <button 
               id="search-trigger"
               onClick={() => setIsSearchOpen(true)}
-              className="flex items-center flex-1 bg-gray-100 border border-transparent hover:border-black hover:bg-white transition-all h-full cursor-text group"
+              className="flex items-center flex-1 bg-gray-100 border border-transparent hover:border-black hover:bg-white transition-all h-full cursor-text group max-w-[200px] md:max-w-none"
             >
-              <div className="px-4 text-gray-400 group-hover:text-black transition-colors">
-                <Search className="w-5 h-5" />
+              <div className="px-3 md:px-4 text-gray-400 group-hover:text-black transition-colors">
+                <Search className="w-4 h-4 md:w-5 md:h-5" />
               </div>
-              <div className="flex-1 text-left px-2 text-sm font-bold text-gray-400 uppercase tracking-wider">
-                Search database...
+              <div className="flex-1 text-left px-1 md:px-2 text-xs md:text-sm font-bold text-gray-400 uppercase tracking-wider truncate">
+                Search...
               </div>
-              <div className="bg-black text-white px-6 h-full flex items-center justify-center font-bold text-xs tracking-widest uppercase hover:bg-gray-800 transition-colors cursor-pointer">
+              <div className="hidden md:flex bg-black text-white px-6 h-full items-center justify-center font-bold text-xs tracking-widest uppercase hover:bg-gray-800 transition-colors cursor-pointer">
                 Find
               </div>
             </button>

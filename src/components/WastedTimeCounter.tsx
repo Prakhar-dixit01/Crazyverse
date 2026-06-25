@@ -41,9 +41,9 @@ export default function WastedTimeCounter() {
 
   return (
     <div className="flex flex-col items-end text-xs font-mono border-l-2 border-black pl-4 h-full justify-center">
-      <div className="text-gray-500 uppercase font-bold text-[10px]">Time Wasted</div>
+      <div className="text-gray-500 uppercase font-bold text-[10px] hidden sm:block">Time Wasted</div>
       <div className="font-black text-black text-lg leading-none">{formatTime(seconds)}</div>
-      <div className="text-green-600 font-bold text-[10px] uppercase truncate max-w-[120px]">{getTitle(seconds)}</div>
+      <div className="text-green-600 font-bold text-[10px] uppercase truncate max-w-[120px] hidden sm:block">{getTitle(seconds)}</div>
     </div>
   );
 }
